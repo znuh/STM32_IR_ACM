@@ -316,8 +316,6 @@ void STM_EVAL_COMInit(COM_TypeDef COM, USART_InitTypeDef* USART_InitStruct)
   /* Enable GPIO clock */
   RCC_APB2PeriphClockCmd(COM_TX_PORT_CLK[COM] | COM_RX_PORT_CLK[COM] | RCC_APB2Periph_AFIO, ENABLE);
 
-#warning TODO: IRDA
-
   if (COM == COM1)
   {
     /* Enable the USART2 Pins Software Remapping */
@@ -338,7 +336,12 @@ void STM_EVAL_COMInit(COM_TypeDef COM, USART_InitTypeDef* USART_InitStruct)
 
   /* USART configuration */
   USART_Init(COM_USART[COM], USART_InitStruct);
-    
+
+#ifdef USE_IRDA
+	USART_IrDACmd(COM_USART[COM], ENABLE);
+#warning IRDA mode enabled!
+#endif
+  
   /* Enable USART */
   USART_Cmd(COM_USART[COM], ENABLE);
 }
