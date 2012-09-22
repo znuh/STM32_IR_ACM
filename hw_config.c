@@ -206,12 +206,9 @@ void USB_Interrupts_Config(void)
 #endif /* STM32L1XX_XD */
 
   /* Enable USART Interrupt */
-  // TODO
-  /*
   NVIC_InitStructure.NVIC_IRQChannel = EVAL_COM1_IRQn;
   NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
   NVIC_Init(&NVIC_InitStructure);
-  */
 }
 
 /*******************************************************************************
@@ -279,12 +276,10 @@ void USART_Config_Default(void)
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 
   /* Configure and enable the USART */
-  // TODO
-  //STM_EVAL_COMInit(COM1, &USART_InitStructure);
+  STM_EVAL_COMInit(COM1, &USART_InitStructure);
 
   /* Enable the USART Receive interrupt */
-  // TODO
-  //USART_ITConfig(EVAL_COM1, USART_IT_RXNE, ENABLE);
+  USART_ITConfig(EVAL_COM1, USART_IT_RXNE, ENABLE);
 }
 
 /*******************************************************************************
@@ -366,8 +361,7 @@ bool USART_Config(void)
   USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
  
   /* Configure and enable the USART */
-  // TODO
-  //STM_EVAL_COMInit(COM1, &USART_InitStructure);
+  STM_EVAL_COMInit(COM1, &USART_InitStructure);
 
   return (TRUE);
 }
@@ -402,10 +396,8 @@ void USB_To_USART_Send_Data(uint8_t* data_buffer, uint8_t Nb_bytes)
   
   for (i = 0; i < Nb_bytes; i++)
   {
-	  // TODO
-    //USART_SendData(EVAL_COM1, *(data_buffer + i));
-    // TODO
-    //while(USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TXE) == RESET); 
+    USART_SendData(EVAL_COM1, *(data_buffer + i));
+    while(USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TXE) == RESET); 
   }  
 }
 
@@ -482,13 +474,11 @@ void USART_To_USB_Send_Data(void)
   
   if (linecoding.datatype == 7)
   {
-	  // TODO
-    //USART_Rx_Buffer[USART_Rx_ptr_in] = USART_ReceiveData(EVAL_COM1) & 0x7F;
+    USART_Rx_Buffer[USART_Rx_ptr_in] = USART_ReceiveData(EVAL_COM1) & 0x7F;
   }
   else if (linecoding.datatype == 8)
   {
-	  // TODO
-    //USART_Rx_Buffer[USART_Rx_ptr_in] = USART_ReceiveData(EVAL_COM1);
+    USART_Rx_Buffer[USART_Rx_ptr_in] = USART_ReceiveData(EVAL_COM1);
   }
   
   USART_Rx_ptr_in++;
