@@ -40,6 +40,20 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
+void GPIO_Config() {
+    GPIO_InitTypeDef	GPIO_InitStructure;
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD, ENABLE);
+
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_Init(GPIOD, &GPIO_InitStructure);
+    
+    // LED off
+    GPIO_SetBits(GPIOD, GPIO_Pin_7);
+}
+
 /*******************************************************************************
 * Function Name  : main.
 * Description    : Main routine.
@@ -50,6 +64,7 @@
 int main(void)
 {
   Set_System();
+  GPIO_Config();
   Set_USBClock();
   USB_Interrupts_Config();
   USB_Init();

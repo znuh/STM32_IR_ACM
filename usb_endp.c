@@ -86,14 +86,19 @@ void EP1_IN_Callback (void)
         USART_Rx_ptr_out += USART_Rx_length;
         USART_Rx_length = 0;
       }
-      
+            
 #ifdef USE_STM3210C_EVAL
       USB_SIL_Write(EP1_IN, &USART_Rx_Buffer[USB_Tx_ptr], USB_Tx_length);  
 #else
       UserToPMABufferCopy(&USART_Rx_Buffer[USB_Tx_ptr], ENDP1_TXADDR, USB_Tx_length);
       SetEPTxCount(ENDP1, USB_Tx_length);
       SetEPTxValid(ENDP1); 
-#endif  
+#endif
+
+      if(!USART_Rx_length) {
+		// LED off
+		GPIO_SetBits(GPIOD, GPIO_Pin_7);
+	  }  
     }
   }
 }

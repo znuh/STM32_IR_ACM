@@ -460,6 +460,11 @@ void Handle_USBAsynchXfer (void)
     SetEPTxCount(ENDP1, USB_Tx_length);
     SetEPTxValid(ENDP1); 
 #endif /* USE_STM3210C_EVAL */
+
+    if(!USART_Rx_length) {
+		// LED off
+		GPIO_SetBits(GPIOD, GPIO_Pin_7);
+	}
   }  
   
 }
@@ -471,6 +476,9 @@ void Handle_USBAsynchXfer (void)
 *******************************************************************************/
 void USART_To_USB_Send_Data(void)
 {
+  
+  // LED on
+  GPIO_ResetBits(GPIOD, GPIO_Pin_7);
   
   if (linecoding.datatype == 7)
   {
