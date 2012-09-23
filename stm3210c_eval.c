@@ -1,4 +1,4 @@
-/**
+/*P*
   ******************************************************************************
   * @file    stm3210c_eval.c
   * @author  MCD Application Team
@@ -338,6 +338,7 @@ void STM_EVAL_COMInit(COM_TypeDef COM, USART_InitTypeDef* USART_InitStruct)
   USART_Init(COM_USART[COM], USART_InitStruct);
 
 #ifdef USE_IRDA
+	USART_SetPrescaler(COM_USART[COM], 1);
 	USART_IrDACmd(COM_USART[COM], ENABLE);
 #warning IRDA mode enabled!
 #endif
