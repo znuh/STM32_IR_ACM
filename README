@@ -1,6 +1,7 @@
 USB ACM with raw IrDA IO for a MMstm32F107 module:
 http://www.propox.com/products/t_264.html?lang=en
 By 'raw' IrDA I mean byte-wise 3/16 RZI SIR without framing.
+Normal serial IO can be used by removing -DUSE_IRDA from the Makefile.
 
 Based on https://github.com/znuh/STM32_VCP and 
 the UM0424 STM32 USB-FS-Device firmware library Virtual COM port example.
