@@ -1,8 +1,8 @@
-
-Loopback USB ACM device for a MMstm32F107 module:
+USB ACM with raw IrDA IO for a MMstm32F107 module:
 http://www.propox.com/products/t_264.html?lang=en
+By 'raw' IrDA I mean byte-wise 3/16 RZI SIR without framing.
 
-Based on https://github.com/znuh/STM32_SkeletonProject and 
+Based on https://github.com/znuh/STM32_VCP and 
 the UM0424 STM32 USB-FS-Device firmware library Virtual COM port example.
 
 COPYRIGHT/LICENSE DETAILS:
